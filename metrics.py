@@ -25,7 +25,7 @@ def metrics(myFile, GTC, trueComm, algorithm):
             writer = csv.writer(out_file, delimiter=';')
             
             if os.stat('communities/metrics'+'.'+str(myFile)).st_size == 0:
-                writer.writerow(["ALGORITHM","Node 1","Node 2","Mult Weight", "PRECISION", "RECALL", "F1", "EDIT DISTANCE"])
+                writer.writerow(["ALGORITHM","Node 1","Node 2","Mult Weight", "PRECISION", "RECALL", "F1", "JaccardIndex", "EDIT DISTANCE"])
         
             for row in reader:
                 
@@ -43,13 +43,16 @@ def metrics(myFile, GTC, trueComm, algorithm):
                    
                 precision = inComm/resultComm
                 recall = inComm/trueComm
-                if(precision+recall==0):
+                if (precision+recall)==0:
                     F1=0
-                else:
+                else:  
                     F1 = 2 * (precision * recall) / (precision + recall)
+                
+                JI = len(np.intersect1d(GTC, obtainedComm))/len(np.union1d(GTC, obtainedComm))
+                
                 ed = editdistance.eval(GTC, obtainedComm)
                 
-                writer.writerow([algorithm, node1, node2, weight, precision, recall, F1, ed]) 
+                writer.writerow([algorithm, node1, node2, weight, precision, recall, F1, JI ,ed]) 
                 
 
     
