@@ -13,6 +13,7 @@ Created on Tue Nov  6 12:45:49 2018
 import matplotlib.pyplot as plt
 import networkx as nx
 from networkx.algorithms.community import LFR_benchmark_graph
+import csv
 
 n = 1000 #(int)number of nodes
 tau1 = 3  #(float) Power law exponent for the degree distribution of the created graph. This value must be strictly greater than one.
@@ -46,32 +47,32 @@ community_list_filename = "lfrCommunity.txt"
 
 #print('Communities: ', communities)
 
-#with open('lfrCommunitiesExample.txt', 'w') as fc:
-#    fc.write(str([list(x) for x in communities]))
-#
-#
-#nx.write_adjlist(G,adjacency_list_filename)
-#fh=open(adjacency_list_filename,'wb')
-#nx.write_adjlist(G, fh)
+with open('lfrCommunitiesExample.txt', 'w') as fc:
+    fc.write(str([list(x) for x in communities]))
+
+
+nx.write_adjlist(G,adjacency_list_filename)
+fh=open(adjacency_list_filename,'wb')
+nx.write_adjlist(G, fh)
 
 
 
-#edge_list = []
-#with open(adjacency_list_filename, 'r') as f:
-#    for line in f:
-#        
-#        if line.startswith("#"): #skip first comment lines
-#            continue;
-#        else:
-#
-#            line = line.rstrip('\n').split(' ')
-#            source = line[0]
-#            for target in line[1:]:
-#                #edge_list.append("%s %s 1" % (source, target)) #1 is for the weight
-#                edge_list.append("%s %s" % (source, target))
-#
-#with open(edge_list_filename, 'w') as f:
-#    f.write('%s\n' % ('\n'.join(edge_list)))
+edge_list = []
+with open(adjacency_list_filename, 'r') as f:
+    for line in f:
+        
+        if line.startswith("#"): #skip first comment lines
+            continue;
+        else:
+
+            line = line.rstrip('\n').split(' ')
+            source = line[0]
+            for target in line[1:]:
+                #edge_list.append("%s %s 1" % (source, target)) #1 is for the weight
+                edge_list.append("%s %s" % (source, target))
+
+with open(edge_list_filename, 'w') as f:
+    f.write('%s\n' % ('\n'.join(edge_list)))
     
   
 with open(community_list_filename, 'w') as f:
@@ -88,8 +89,13 @@ with open(community_list_filename, 'w') as my_file:
         
     my_file.write(text)
 
-
-
+#convert edge txt file to csv file appending also weight 1 to all edges
+with open('lfrEdgelistExample.txt') as data_file: 
+            reader = csv.reader(data_file, delimiter=' ')        
+            with open('lfrEdgelistExample.csv', 'w') as out_file:
+                writer = csv.writer(out_file, delimiter=';')  
+                for row in reader:
+                    writer.writerow([row[0],row[1], 1])
 
 
 
