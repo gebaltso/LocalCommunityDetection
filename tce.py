@@ -234,7 +234,7 @@ def tce(file, s, myFile):
         writer = csv.writer(out_file, delimiter=';')
         
         if os.stat('communities/tce_communities'+str(myFile)+'.csv').st_size == 0:
-            writer.writerow(["Node 1", "Node 2", "Multiplied Weight", "Community"])
+            writer.writerow(["Node 1", "Node 2", "Multiplied Weight", "Seed node", "Community"])
         
         row = [node1]+[node2]+[wName]+[s]+list(C)
         

@@ -158,6 +158,8 @@ def lte(file, s, myFile):
     #G = nx.read_weighted_edgelist("karateChanged1Seed10.csv", create_using=nx.Graph(), delimiter=";")
     #G = nx.read_weighted_edgelist("netCol/netColMultiply100.csv", create_using=nx.Graph(), delimiter=";")
     #G = nx.read_weighted_edgelist("dblp/dblpWeightedMult.csv", create_using=nx.Graph(), delimiter=";")
+    
+    
     G = nx.read_weighted_edgelist(file, create_using=nx.Graph(), delimiter=";")
     
     # print("Edges: ", G.number_of_edges()) # 2671753
@@ -257,7 +259,7 @@ def lte(file, s, myFile):
         writer = csv.writer(out_file, delimiter=';')
         
         if os.stat('communities/lte_communities'+str(myFile)+'.csv').st_size == 0:
-            writer.writerow(["Node 1", "Node 2", "Multiplied Weight", "Community"])
+            writer.writerow(["Node 1", "Node 2", "Multiplied Weight", "Seed node", "Community"])
         
         row = [node1]+[node2]+[wName]+[s]+C
         
