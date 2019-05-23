@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu May  9 11:23:39 2019
+Created on Tue May 21 15:26:40 2019
 
 @author: georgiabaltsou
-
-Script for producing LFR graphs and take as output the final communities from eac method and the corresponding metrics
-
 """
 
 import csv
@@ -27,17 +24,16 @@ from ReWeighting import reWeighting
 
 start_time = time.time()
 
-#myFile = lfrEdgelistN1000MU0.1*.csv  #just to remember the form of file name
-myFile = LFR(1000, 3, 1.1, 0.1)
-file = myFile.split("*")[0] #keep the name without the .csv
+os.chdir('testExperiments/datasets/lfr/')
 
-#sys.exit()
+myFile = 'lfrEdgelistN1000MU0.1*.csv'
+file = 'lfrEdgelistN1000MU0.1*'
 
-#find a random community of the corresponding graph and store it in GTC
-commFile = file.split("N")[1]
-GTCline = random.choice(open('lfrCommN'+str(commFile)+'*.txt').readlines())
-GTC = list(GTCline.split(" "))
-GTC[-1] = GTC[-1].strip()
+shutil.copy2(myFile, 'lfrEdgelistN1000MU0.1*.csv<111-111>1.csv')
+shutil.copy2('lfrEdgelistN1000MU0.1*.csv<111-111>1.csv','../weighted/lfrEdgelistN1000MU0.1*.csv<111-111>1.csv' )
+shutil.copy2(myFile, '../weighted/lfrEdgelistN1000MU0.1*.csv<000-000>1.csv')
+
+GTC = ['327', '210', '352', '485', '616', '236', '371', '501', '246', '638', '639']
 
 #find the length of the community stored in GTC
 trueComm = len(GTC)
@@ -51,6 +47,7 @@ print("------------------------------")
 #till now working dir = /Users/georgiabaltsou/Desktop/PhD/Local_exp/experiments/datasets/lfr
 #print("Current Working Directory " , os.getcwd())
 
+
 os.chdir('../')
 
 weightedFiles(ReWeigthedFile, GTC, graph)
@@ -63,26 +60,22 @@ print("------------------------------")
 for filename in os.listdir('weighted'):
     for seed in GTC:
         
-        lemon('weighted/'+str(filename), seed, file)
+#        lemon('weighted/'+str(filename), seed, file)
         
-        
-#        lte('weighted/'+str(filename), seed, file)
-#
-#        tce('weighted/'+str(filename), seed, file)
-#       
-#        newLCD('weighted/'+str(filename), seed, file)
+        lte('weighted/'+str(filename), seed, file)
+
+        tce('weighted/'+str(filename), seed, file)
+       
+        newLCD('weighted/'+str(filename), seed, file)
         
 print("Algorithms completed.")
 print("------------------------------")
 
 
 ##Write the files with precision and recall for each community of the 3 algorithms
-#print("Current Working Directory " , os.getcwd())
-os.chdir('../Local_exp/experiments/datasets/communities')
 
+os.chdir('communities')
 
-#GTC = ["714", "330", "334", "721", "339", "149", "987", "220", "285", "414", "476", "96", "417", "936", "237", "622", "111", "61", "755", "627", "253", "764", "189"]
-#trueComm = len(GTC)
 
 for filename in os.listdir(os.getcwd()):
     
@@ -99,9 +92,3 @@ print("------------------------------")
 
 print("Execution time: %s seconds " % (time.time() - start_time))
 print("------------------------------")   
-
-
-
-
-
-

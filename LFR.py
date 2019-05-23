@@ -35,12 +35,19 @@ def LFR(n, tau1, tau2, mu):
 #max_iters (int) Maximum number of iterations to try to create the community sizes, degree distribution, and community affiliations.
 #seed (integer, random_state, or None (default)) Indicator of random number generation state.
     
+    
+    
     os.chdir('experiments/datasets/lfr')
 
     G = LFR_benchmark_graph(n, tau1, tau2, mu, average_degree=10, max_degree=50, min_community=10, max_community=50)
     
     #remove self loops
     G.remove_edges_from(G.selfloop_edges())
+    
+    numberOfEdges = G.number_of_edges()
+    
+    print("Number of edges of graph G: ", numberOfEdges)
+    print("------------------------------")
     
     #na mh sxediazontai oi aksones    
     #plt.axis('off')         

@@ -10,11 +10,11 @@ Created on Fri May 10 12:56:49 2019
 import csv
 import os
 
-def weightedFiles(myFile, GTC):
+def weightedFiles(myFile, GTC, graph):
     #creation of weighted files from different seed each time
     for index, i in enumerate(GTC):
 #        FileAdj(myFile, i)
-        FilesAdj(myFile, i, GTC, index)
+        FilesAdj(myFile, i, GTC, index, graph)
 
 #def FileAdj(myFile, s):
 #
@@ -37,17 +37,20 @@ def weightedFiles(myFile, GTC):
 #                counter += 1
                                       
                     
-def FilesAdj(myFile, s, GTC, index):
+def FilesAdj(myFile, s, GTC, index, graph):
                                      
-    for j in GTC[index:]:       
-        if s==j: continue
+    for j in GTC[index:]: 
+        
+        if (s==j) or ((j, s) not in graph.edges()): continue
+#        if s==j: continue
     
         counter2 = 1
         #change counter to <=10 for more weights
-        while(counter2<=10):
-            if counter2 == 1:
-                counter2 += 1
-                continue
+        while(counter2<=6):
+            
+#            if counter2 == 1:
+#                counter2 += 1
+#                continue
 
             with open('lfr/'+str(myFile)) as data_file: 
                 reader = csv.reader(data_file, delimiter=';')

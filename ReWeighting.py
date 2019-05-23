@@ -36,11 +36,7 @@ def reWeighting(file):
     
     cycls_3 = [c for c in nx.cycle_basis(G) if len(c)==3]   #cycles
     #cycls_4 = [c for c in nx.cycle_basis(G) if len(c)==4]   #rectangles
-    
-    #print(cycls_3)
-    #print(cycls_4)
-    
-    
+        
     #Compute the denominator We
     WeDict = {}
     
@@ -74,17 +70,13 @@ def reWeighting(file):
         We += temp1
         
         WeDict[edge] = We
-                    
-    #print(WeDict)  
-    #print("-------------------------------------------------")        
+      
                 
     #Compute the nominator Ge
     GeDict = {}
     
     for edge in G.edges():
-        
-    #    print("edge= ", edge)
-        
+                
         Ge = 0
         EuUEv = []
         source, target = edge
@@ -100,21 +92,18 @@ def reWeighting(file):
             if source in i and target in i:
                 Te += 1
                 TeList.append(i)
-                
-    #    print("Te= ", TeList)
         
     #    for i in cycls_4:
     #        if source in i and target in i:
     #            Re += 1
     #            ReList.append(i)
-    #            
-    #    print("Re= ", ReList)
+
                 
     #    TeListUReList = np.union1d(TeList, ReList)
     #    
         intersection = np.intersect1d(EuUEv,TeList )
         
-    #    print(intersection)
+
            
         for node in intersection:
             
@@ -139,18 +128,14 @@ def reWeighting(file):
         Ge += temp1
         
         GeDict[edge] = Ge
-                    
-    #print(GeDict)            
-                
+                                              
       
     Ce = {}   
     for key, value in WeDict.items():   
         for key2, value2 in GeDict.items():    
             if(key==key2):
                 Ce[key] = value/value2
-                
-    #print(Ce)
-                
+                 
     
     #change the graph's weights after the re-calculating
     for u,v,d in G.edges(data=True):
@@ -162,4 +147,4 @@ def reWeighting(file):
         for key, value in Ce.items():
             writer.writerow([key[0], key[1], value])
 
-    return str(file)
+    return str(file), G
