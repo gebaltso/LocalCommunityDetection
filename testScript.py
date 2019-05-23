@@ -29,9 +29,9 @@ os.chdir('testExperiments/datasets/lfr/')
 myFile = 'lfrEdgelistN1000MU0.1*.csv'
 file = 'lfrEdgelistN1000MU0.1*'
 
-shutil.copy2(myFile, 'lfrEdgelistN1000MU0.1*.csv<111-111>1.csv')
-shutil.copy2('lfrEdgelistN1000MU0.1*.csv<111-111>1.csv','../weighted/lfrEdgelistN1000MU0.1*.csv<111-111>1.csv' )
-shutil.copy2(myFile, '../weighted/lfrEdgelistN1000MU0.1*.csv<000-000>1.csv')
+#shutil.copy2(myFile, 'lfrEdgelistN1000MU0.1*.csv<111-111>1.csv')
+#shutil.copy2('lfrEdgelistN1000MU0.1*.csv<111-111>1.csv','../weighted/lfrEdgelistN1000MU0.1*.csv<111-111>1.csv' )
+#shutil.copy2(myFile, '../weighted/lfrEdgelistN1000MU0.1*.csv<000-000>1.csv')
 
 GTC = ['327', '210', '352', '485', '616', '236', '371', '501', '246', '638', '639']
 
@@ -39,10 +39,10 @@ GTC = ['327', '210', '352', '485', '616', '236', '371', '501', '246', '638', '63
 trueComm = len(GTC)
 
 #call reWeighting for find new weights for the graph's edges
-ReWeigthedFile, graph = reWeighting(myFile)
-
-print("Re-Weighting of edges done.")
-print("------------------------------")
+#ReWeigthedFile, graph = reWeighting(myFile)
+#
+#print("Re-Weighting of edges done.")
+#print("------------------------------")
 
 #till now working dir = /Users/georgiabaltsou/Desktop/PhD/Local_exp/experiments/datasets/lfr
 #print("Current Working Directory " , os.getcwd())
@@ -50,10 +50,10 @@ print("------------------------------")
 
 os.chdir('../')
 
-weightedFiles(ReWeigthedFile, GTC, graph)
-
-print("Weighted files created.")
-print("------------------------------")
+#weightedFiles(ReWeigthedFile, GTC, graph)
+#
+#print("Weighted files created.")
+#print("------------------------------")
 
 #sys.exit()
 

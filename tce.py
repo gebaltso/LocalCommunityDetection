@@ -16,6 +16,7 @@ import networkx as nx
 import numpy as np 
 import csv
 import os
+import time
 
 
 def findNeighboorOfu(G,u):
@@ -112,6 +113,8 @@ def SCORE(u, S, C, G):
 
 def tce(file, s, myFile):
     # main program
+    
+    start_time = time.time()
     
     node1 = file.split("<")[1].split("-")[0]
     
@@ -240,7 +243,10 @@ def tce(file, s, myFile):
         
         writer.writerow(row)
 
-
+    with open('time/time.txt', 'a') as time_file:
+        time_file.write('TCE execution time is:')
+        time_file.write(str(time.time() - start_time))
+        time_file.write('\n')
 
 #counter = 0
 #

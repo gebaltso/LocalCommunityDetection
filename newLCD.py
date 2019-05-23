@@ -14,6 +14,7 @@ import networkx as nx
 import numpy as np 
 import csv
 import os
+import time
 
 #find the neighbors of node u
 def findNeighboorOfu(G,u):
@@ -90,6 +91,8 @@ def findM(G, LC):
 
     ###### main program #######
 def newLCD(file, s, myFile):
+    
+    start_time = time.time()
     
     node1 = file.split("<")[1].split("-")[0]
     
@@ -196,6 +199,12 @@ def newLCD(file, s, myFile):
         row = [node1]+[node2]+[wName]+[s]+LC
         
         writer.writerow(row)
+        
+        
+    with open('time/time.txt', 'a') as time_file:
+        time_file.write('newLCD execution time is:')
+        time_file.write(str(time.time() - start_time))
+        time_file.write('\n')
         
 #counter = 0
 #

@@ -4,6 +4,7 @@ import networkx as nx
 import numpy as np 
 import csv
 import os
+import time
 
 
 # definition 1: (Neighborhood) Γ(u) = geitones  + u
@@ -137,6 +138,8 @@ def tunableTightnessGain(C, G, N, a, factor,similarityStore):
 def lte(file, s, myFile):
 
     # main program
+    
+    start_time = time.time()
 
     node1 = file.split("<")[1].split("-")[0]
     
@@ -264,6 +267,12 @@ def lte(file, s, myFile):
         row = [node1]+[node2]+[wName]+[s]+C
         
         writer.writerow(row)
+        
+    with open('time/time.txt', 'a') as time_file:
+        time_file.write('LTE execution time is:')
+        time_file.write(str(time.time() - start_time))
+        time_file.write('\n')
+         
     
     #print("C: ")
     #print(len(C))
