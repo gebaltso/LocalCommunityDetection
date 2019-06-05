@@ -154,7 +154,8 @@ def newLCD(file, s, myFile):
         DM = 0
         maxDM = 0
         previousNLC = list(NLC)
-                        
+             
+           
         for u in NLC:                   
             tmpLC.append(u)
             tmpM = findM(G, tmpLC)
@@ -162,10 +163,11 @@ def newLCD(file, s, myFile):
               
             
             if (DM > maxDM):
-                if (u not in LC):
+                #if (u not in LC):
                     maxDM = DM
                     node = u 
-                              
+             
+                
             tmpLC = list(LC)  
         
         if (type(LC) != list):
@@ -197,6 +199,7 @@ def newLCD(file, s, myFile):
             writer.writerow(["Node 1", "Node 2", "Multiplied Weight", "Seed node", "Community"])
         
         row = [node1]+[node2]+[wName]+[s]+LC
+#        row = [s]+LC
         
         writer.writerow(row)
         
